@@ -1,0 +1,132 @@
+<template>
+  <section id="contents">
+    <Hgr title="공지사항 게시판 등록" descript="이곳에서 공지사항 게시판 내용을 등록할 수 있습니다."></Hgr>
+
+    <table class="table_global">
+      <caption>공지사항 게시판에 등록할 게시물의 카테고리, 제목, 내용을 입력할 수 있습니다.</caption>
+
+      <colgroup>
+        <col style="width:10%;" />
+        <col />
+      </colgroup>
+
+      <tbody>
+        <tr>
+          <th scope="row">아이디</th>
+          <td><span class="inputfield_outer"><input type="text" name="id" class="inputfield_global" readonly v-model="id" /></span></td>
+        </tr>
+        <tr>
+          <th scope="row">작성자</th>
+          <td><span class="inputfield_outer"><input type="text" name="name" class="inputfield_global" readonly v-model="name" /></span></td>
+        </tr>
+        <tr>
+          <th scope="row">카테고리</th>
+          <td><span class="inputfield_outer"><input type="text" name="category" class="inputfield_global" readonly v-model="category" /></span></td>
+        </tr>
+        <tr>
+          <th scope="row">제목</th>
+          <td><span class="inputfield_outer"><input type="text" name="subject" class="inputfield_global" v-model="subject" /></span></td>
+        </tr>
+        <tr>
+          <th scope="row">내용</th>
+          <td>
+            <vue-editor class="quill-editor"
+            useCustomImageHandler
+            @imageAdded="handleImageAdded" v-model="htmlForEditor">
+            </vue-editor>
+          </td>
+          <!--
+          <td><span class="textfield_outer"><textarea name="content" id="content" class="textfield_global" v-model="content"></textarea></span></td>
+          -->
+        </tr>
+        <tr>
+          <th scope="row">첨부파일</th>
+          <td><input type="file" name="file" ref="file" /></td>
+        </tr>
+      </tbody>
+    </table><!-- // table_global -->
+
+    <div class="board_gravity">
+      <div class="inner_gravity">
+        <button type="button" class="button_smarteditor" v-on:click="noticeWrite">등록</button>
+        <router-link v-bind:to="{name: 'NoticeList'}" class="button_global">취소</router-link>
+      </div><!-- // inner_gravity -->
+    </div><!-- // board_gravity -->
+  </section><!-- // contents -->
+</template>
+
+<script>
+// Vue Instant Life Cycle
+// beforeCreate → created → beforeMount → mounted → beforeUpdate → updated → beforeDestroy → destroyed
+
+import Constant from '../../../Constant.js'
+import Hgr from '../member/Hgroup.vue'
+
+import { VueEditor } from 'vue2-editor'
+
+import axios from 'axios'
+
+export default {
+  name: 'noticeWrite',
+  components: { Hgr, VueEditor },
+  data () {
+    return { id: this.id, name: this.name, category: '카테고리', subject: '', content: '', htmlForEditor: '' }
+  },
+  mounted () {
+    this.id = localStorage.getItem('id')
+    console.log('this.id: ', this.id)
+
+    this.name = localStorage.getItem('name')
+    console.log('this.name: ', this.name)
+
+    console.log('*** this.$store.state.gnb.menu: ', this.$store.state.gnb.menu)
+  },
+  methods: {
+    handleImageAdded: function (file, Editor, cursorLocation, resetUploader) {
+      // An example of using FormData
+      // NOTE: Your key could be different such as:
+      // formData.append('file', file)
+
+      console.log('file: ', file)
+      console.log('Editor: ', Editor)
+      console.log('cursorLocation: ', cursorLocation)
+      console.log('resetUploader: ', resetUploader)
+
+      let formData = new FormData()
+      formData.append('image', file)
+
+      axios({
+        url: '/api/admin/vuejs/notice/write.action',
+        method: 'POST',
+        data: formData
+      }).then((result) => {
+        let url = result.data.url // Get url from response
+        console.log('url: ', url)
+
+        Editor.insertEmbed(cursorLocation, 'image', url)
+
+        resetUploader()
+      }).catch((error) => {
+        console.log('error: ', error)
+      })
+    },
+    noticeWrite () {
+      console.log('noticeWrite')
+      console.log('this.id: ', this.id)
+      console.log('this.name: ', this.name)
+
+      let formData = new FormData()
+
+      formData.append('id', this.id)
+      formData.append('name', this.name)
+      formData.append('category', this.category)
+      formData.append('subject', this.subject)
+      // formData.append('content', this.content)
+      formData.append('content', this.htmlForEditor)
+      formData.append('file', this.$refs.file.files[0])
+
+      this.$store.dispatch(Constant.WRITE, formData)
+    }
+  }
+}
+</script>
