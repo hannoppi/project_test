@@ -83,6 +83,9 @@ public class NoticeDAO {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		
+		System.out.println("* currentPage: " + currentPage);
+		System.out.println("* limit: " + limit);
+		
 		String sql = "SELECT * FROM NOTICE_BOARD";
 		
 		// limit: 한 페이지에 노출할 게시물의 개수입니다.
@@ -95,12 +98,16 @@ public class NoticeDAO {
 		
 		System.out.println("[NoticeDAO.java] (getNoticeList) currentPage == 1 : " + (currentPage == 1));
 		if (currentPage == 1) {
+			System.out.println("1. 읽을 마지막 row 번호입니다.");
+			
 			end = start + limit; // 읽을 마지막 row 번호입니다.
 		} else {
+			System.out.println("2. 읽을 마지막 row 번호입니다.");
+			
 			end = start; // 읽을 마지막 row 번호입니다.
 		}
 		
-		System.out.println("[NoticeDAO.java] (getNoticeList) end : " + end);
+		System.out.println("[NoticeDAO.java] (getNoticeList) 3. end : " + end);
 		
 		NoticeVO nVo = null;
 		List<NoticeVO> noticeList = new ArrayList<NoticeVO>();
@@ -120,11 +127,15 @@ public class NoticeDAO {
 		
 		System.out.println("[NoticeDAO.java] (getNoticeList) sql: " + sql);
 		
+		System.out.println("* start: " + start);
+		System.out.println("* end: " + end);
+		
 		try {
 			connection = Manager.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, start);
-			preparedStatement.setInt(2, end);
+			// preparedStatement.setInt(2, end);
+			preparedStatement.setInt(2, limit);
 			resultSet = preparedStatement.executeQuery();
 			
 			while (resultSet.next()) {

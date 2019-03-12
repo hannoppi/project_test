@@ -6,30 +6,30 @@
       <caption>공지사항 게시판에 등록된 게시물의 카테고리, 제목, 내용을 수정할 수 있습니다.</caption>
 
       <colgroup>
-        <col style="width:10%;" />
-        <col />
+        <col style="width:10%;">
+        <col>
       </colgroup>
 
       <tbody>
         <tr>
           <th scope="row">번호</th>
-          <td><span class="inputfield_outer"><input type="text" name="number" class="inputfield_global" v-model="number" /></span></td>
+          <td><span class="inputfield_outer"><input type="text" name="number" class="inputfield_global" v-model="number"></span></td>
         </tr>
         <tr>
           <th scope="row">아이디</th>
-          <td><span class="inputfield_outer"><input type="text" name="id" class="inputfield_global" v-model="id" /></span></td>
+          <td><span class="inputfield_outer"><input type="text" name="id" class="inputfield_global" v-model="id"></span></td>
         </tr>
         <tr>
           <th scope="row">작성자</th>
-          <td><span class="inputfield_outer"><input type="text" name="name" class="inputfield_global" v-model="name" /></span></td>
+          <td><span class="inputfield_outer"><input type="text" name="name" class="inputfield_global" v-model="name"></span></td>
         </tr>
         <tr>
           <th scope="row">카테고리</th>
-          <td><span class="inputfield_outer"><input type="text" name="category" class="inputfield_global" v-model="category" /></span></td>
+          <td><span class="inputfield_outer"><input type="text" name="category" class="inputfield_global" v-model="category"></span></td>
         </tr>
         <tr>
           <th scope="row">제목</th>
-          <td><span class="inputfield_outer"><input type="text" name="subject" class="inputfield_global"  v-model="subject" /></span></td>
+          <td><span class="inputfield_outer"><input type="text" name="subject" class="inputfield_global"  v-model="subject"></span></td>
         </tr>
         <tr class="row_local">
           <th scope="row">내용</th>
@@ -41,22 +41,15 @@
     <div class="board_gravity">
       <div class="inner_gravity">
         <button type="submit" class="button_smarteditor" v-on:click="noticeModify">수정</button>
-        <router-link v-bind:to="{name: 'NoticeList'}" class="button_global">취소</router-link>
+        <router-link v-bind:to="{ name: 'NoticeList' }" class="button_global">취소</router-link>
       </div><!-- // inner_gravity -->
     </div><!-- // board_gravity -->
   </section><!-- // contents -->
 </template>
 
 <script>
-// components/container/notice/NoticeModify.vue
-
-// Vue Instant Life Cycle
-// beforeCreate → created → beforeMount → mounted → beforeUpdate → updated → beforeDestroy → destroyed
-
 import Constant from '../../../Constant.js'
 import Hgr from '../member/Hgroup.vue'
-
-// import { mapState } from 'vuex'
 
 export default {
   name: 'noticeModify',
@@ -65,11 +58,6 @@ export default {
   data () {
     return { id: '', name: '', category: '', subject: '', content: '' }
   },
-  /*
-  computed: mapState({
-    noticemodify: (state) => state.board
-  }),
-  */
   methods: {
     noticeModify () {
       this.$store.dispatch(Constant.MODIFY, { number: this.number, id: this.id, name: this.name, category: this.category, subject: this.subject, content: this.content })

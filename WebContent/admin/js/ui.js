@@ -33,7 +33,7 @@ var UI = (function () {
 		opener.document.getElementById('id').value = id; // "${id }";
 		opener.document.getElementById('confirmId').value = id; // "${id }";
 		
-		self.close();
+		// self.close();
 	}; // confirmSuccess
 	
 	var confirmFrm = function () {
@@ -111,10 +111,16 @@ var UI = (function () {
 		
 		for (var i = 0; i < inputfield.length; i++) {
 			inputfield[i].addEventListener('focus', function () {
+				console.log('this: ', this)
+		        console.log('this.value: ', this.value)
+		        console.log('this.defaultValue: ', this.defaultValue)
+		        console.log('this.previousSibling: ', this.previousSibling)
+		        
 				if (this.value === this.defaultValue) this.previousSibling.style.display = 'none';
 			});
 			
 			inputfield[i].addEventListener('blur', function () {
+				console.log(234);
 				if (this.value === '') this.previousSibling.style.display = 'block';
 			});
 		}

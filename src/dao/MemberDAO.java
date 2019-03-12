@@ -260,6 +260,49 @@ public class MemberDAO {
 		return result;
 	} // insert()
 	
+	
+	// 회원가입
+	public Boolean insertVue(MemberVO mVo) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		SHA256 sha = SHA256.getInsatnce();
+		
+		String sql = "INSERT INTO MEMBER(id, password, quiz, name, regdate) VALUES(?, ?, ?, ?, now())";
+		
+		Boolean result = false;
+		
+		try {
+			connection = Manager.getConnection();
+			
+			String originalPassword = mVo.getPassword();
+			// System.out.println("[MemberDAO.java] (insert) originalPassword: " + originalPassword);
+			
+			System.out.println("[MemberDAO.java] (insert) originalPassword.getBytes(): " + originalPassword.getBytes());
+			
+			String shaPassword = sha.getSha256(originalPassword.getBytes());
+			System.out.println("[MemberDAO.java] (insert) shaPassword: " + shaPassword);
+			
+			String bcrypt = BCrypt.hashpw(shaPassword, BCrypt.gensalt());
+			System.out.println("[MemberDAO.java] (insert) bcrypt: " + bcrypt);
+			
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, mVo.getId());
+			preparedStatement.setString(2, bcrypt);
+			preparedStatement.setString(3, mVo.getQuiz());
+			preparedStatement.setString(4, mVo.getName());
+			preparedStatement.executeUpdate();
+			
+			result = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Manager.close(connection, preparedStatement);
+		}
+		
+		return result;
+	} // insert()
+	
 	// 아이디 중복확인
 	public int confirmId(String id) {
 		Connection connection = null;
@@ -276,9 +319,7 @@ public class MemberDAO {
 			preparedStatement.setString(1, id);
 			resultSet = preparedStatement.executeQuery();
 			
-			if (resultSet.next()) {
-				return 1;
-			}
+			if (resultSet.next()) return 1;
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

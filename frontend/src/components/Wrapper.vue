@@ -15,10 +15,6 @@ import Ftr from './footer/Footer.vue'
 
 export default {
   name: 'wrapper',
-  components: {
-    'hdr': Hdr,
-    'container': Container,
-    'ftr': Ftr
-  }
+  components: { 'hdr': Hdr, 'container': Container, 'ftr': Ftr }
 }
 </script>

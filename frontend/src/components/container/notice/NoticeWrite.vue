@@ -6,42 +6,34 @@
       <caption>공지사항 게시판에 등록할 게시물의 카테고리, 제목, 내용을 입력할 수 있습니다.</caption>
 
       <colgroup>
-        <col style="width:10%;" />
-        <col />
+        <col style="width:10%;">
+        <col>
       </colgroup>
 
       <tbody>
         <tr>
           <th scope="row">아이디</th>
-          <td><span class="inputfield_outer"><input type="text" name="id" class="inputfield_global" readonly v-model="id" /></span></td>
+          <td><span class="inputfield_outer"><input type="text" name="id" class="inputfield_global" readonly v-model="id"></span></td>
         </tr>
         <tr>
           <th scope="row">작성자</th>
-          <td><span class="inputfield_outer"><input type="text" name="name" class="inputfield_global" readonly v-model="name" /></span></td>
+          <td><span class="inputfield_outer"><input type="text" name="name" class="inputfield_global" readonly v-model="name"></span></td>
         </tr>
         <tr>
           <th scope="row">카테고리</th>
-          <td><span class="inputfield_outer"><input type="text" name="category" class="inputfield_global" readonly v-model="category" /></span></td>
+          <td><span class="inputfield_outer"><input type="text" name="category" class="inputfield_global" readonly v-model="category"></span></td>
         </tr>
         <tr>
           <th scope="row">제목</th>
-          <td><span class="inputfield_outer"><input type="text" name="subject" class="inputfield_global" v-model="subject" /></span></td>
+          <td><span class="inputfield_outer"><input type="text" name="subject" class="inputfield_global" v-model="subject"></span></td>
         </tr>
         <tr>
           <th scope="row">내용</th>
-          <td>
-            <vue-editor class="quill-editor"
-            useCustomImageHandler
-            @imageAdded="handleImageAdded" v-model="htmlForEditor">
-            </vue-editor>
-          </td>
-          <!--
-          <td><span class="textfield_outer"><textarea name="content" id="content" class="textfield_global" v-model="content"></textarea></span></td>
-          -->
+          <td><vue-editor class="quill-editor" useCustomImageHandler @imageAdded="handleImageAdded" v-model="htmlForEditor"></vue-editor></td>
         </tr>
         <tr>
           <th scope="row">첨부파일</th>
-          <td><input type="file" name="file" ref="file" /></td>
+          <td><input type="file" name="file" ref="file"></td>
         </tr>
       </tbody>
     </table><!-- // table_global -->
@@ -56,9 +48,6 @@
 </template>
 
 <script>
-// Vue Instant Life Cycle
-// beforeCreate → created → beforeMount → mounted → beforeUpdate → updated → beforeDestroy → destroyed
-
 import Constant from '../../../Constant.js'
 import Hgr from '../member/Hgroup.vue'
 
@@ -74,23 +63,13 @@ export default {
   },
   mounted () {
     this.id = localStorage.getItem('id')
-    console.log('this.id: ', this.id)
-
     this.name = localStorage.getItem('name')
-    console.log('this.name: ', this.name)
-
-    console.log('*** this.$store.state.gnb.menu: ', this.$store.state.gnb.menu)
   },
   methods: {
     handleImageAdded: function (file, Editor, cursorLocation, resetUploader) {
       // An example of using FormData
       // NOTE: Your key could be different such as:
       // formData.append('file', file)
-
-      console.log('file: ', file)
-      console.log('Editor: ', Editor)
-      console.log('cursorLocation: ', cursorLocation)
-      console.log('resetUploader: ', resetUploader)
 
       let formData = new FormData()
       formData.append('image', file)
@@ -101,27 +80,21 @@ export default {
         data: formData
       }).then((result) => {
         let url = result.data.url // Get url from response
-        console.log('url: ', url)
 
         Editor.insertEmbed(cursorLocation, 'image', url)
 
         resetUploader()
       }).catch((error) => {
-        console.log('error: ', error)
+        console.error(error)
       })
     },
     noticeWrite () {
-      console.log('noticeWrite')
-      console.log('this.id: ', this.id)
-      console.log('this.name: ', this.name)
-
       let formData = new FormData()
 
       formData.append('id', this.id)
       formData.append('name', this.name)
       formData.append('category', this.category)
       formData.append('subject', this.subject)
-      // formData.append('content', this.content)
       formData.append('content', this.htmlForEditor)
       formData.append('file', this.$refs.file.files[0])
 

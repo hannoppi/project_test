@@ -6,12 +6,12 @@
       <caption>다운로드 게시판의 등록된 게시물의 번호, 카테고리, 제목, 등록일, 조회수를 확인할 수 있습니다.</caption>
 
       <colgroup>
-        <col style="width:10%;" />
-        <col style="width:10%;" />
-        <col />
-        <col style="width:10%;" />
-        <col style="width:15%;" />
-        <col style="width:10%;" />
+        <col style="width:10%;">
+        <col style="width:10%;">
+        <col>
+        <col style="width:10%;">
+        <col style="width:15%;">
+        <col style="width:10%;">
       </colgroup>
 
       <thead>
@@ -27,12 +27,12 @@
 
       <tbody v-if="downloadlist.length !== 0">
         <tr v-for="(download, index) in downloadlist" v-bind:key="index">
-          <td>{{download.number}}</td>
-          <td>{{download.category}}</td>
-          <td class="subject"><router-link v-bind:to="{name: 'DownloadView', params: {number: download.number}}">{{download.subject}}</router-link></td>
-          <td>{{download.name}}</td>
-          <td>{{download.regdate}}</td>
-          <td>{{download.count}}</td>
+          <td>{{ download.number }}</td>
+          <td>{{ download.category }}</td>
+          <td class="subject"><router-link v-bind:to="{ name: 'DownloadView', params: { number: download.number } }">{{ download.subject }}</router-link></td>
+          <td>{{ download.name }}</td>
+          <td>{{ download.regdate }}</td>
+          <td>{{ download.count }}</td>
         </tr>
       </tbody>
 
@@ -48,21 +48,8 @@
       <a href="#" class="previous" v-else v-on:click="downloadlist">이전</a>
 
       <div class="inner_paging">
-        <router-link
-          v-bind:to="{ name: 'downloadlist', query: { number: index } }"
-          v-for="index in paging | paging.endPage"
-          v-bind:key="index"
-          v-bind:class="current (index)"
-          v-on:click.native="downloadlist(index)"
-        >
-          {{ index }}<span class="invisible" v-if="paging.currentPage === index">현재 페이지</span>
+        <router-link v-bind:to="{ name: 'downloadlist', query: { number: index } }" v-for="index in paging | paging.endPage" v-bind:key="index" v-bind:class="current (index)" v-on:click.native="downloadlist(index)">{{ index }}<span class="invisible" v-if="paging.currentPage === index">현재 페이지</span>
         </router-link>
-        <!-- <a href="javascript:;" v-for="index in paging | paging.endPage" v-bind:key="index" v-bind:class="current (index)" v-on:click="downloadlist(index)">
-          {{ index }}<span class="invisible" v-if="paging.currentPage === index">현재 페이지</span>
-        </a> -->
-        <!-- <button type="button" v-for="index in paging | paging.endPage" v-bind:key="index" v-bind:class="current (index)" v-on:click="downloadlist(index)">
-          {{ index }}<span class="invisible" v-if="paging.currentPage === index">현재 페이지</span>
-        </button> -->
       </div><!-- // inner_paging -->
 
       <span class="next" v-if="paging.currentPage >= paging.maxPage">다음</span>
@@ -82,7 +69,7 @@
         </select>
       </div><!-- // design_select -->
 
-      <span class="inputfield_outer"><input type="text" name="keyword" class="inputfield_keyword" v-model="keyword" /></span>
+      <span class="inputfield_outer"><input type="text" name="keyword" class="inputfield_keyword" v-model="keyword"></span>
       <a href="#" class="button_global" v-on:click="downloadlist(null)">검색</a>
     </div><!-- // board_search -->
 
@@ -95,9 +82,6 @@
 </template>
 
 <script>
-// Vue Instant Life Cycle
-// beforeCreate → created → beforeMount → mounted → beforeUpdate → updated → beforeDestroy → destroyed
-
 import Constant from '../../../Constant.js'
 import Hgr from '../member/Hgroup.vue'
 

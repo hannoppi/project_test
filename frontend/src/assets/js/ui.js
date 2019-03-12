@@ -6,11 +6,12 @@
 ---------- ---------- ---------- ---------- ---------- */
 
 var UI = (function () {
+  /*
   var confirmId = function () {
     console.log('(confirmId) 아이디 중복확인을 클릭하였습니다.')
 
     var frm = arguments[0]
-    var url = 'confirmId.action?id='
+    var url = '/member/confirmId?id='
 
     if (frm.id.value === '') {
       alert('사용할 아이디를 입력해주세요.')
@@ -18,10 +19,16 @@ var UI = (function () {
       return false
     }
 
+    console.log('frm.id.value: ', frm.id.value)
+
     url += frm.id.value
     console.log('(confirmId) url: ', url)
 
     window.open(url, '_blank', 'toolbar=no, menubar=no, scrollbar=yes, resizable=no, width=480, height=320')
+  } // confirmId
+  */
+  var confirmId = function () {
+    console.log('confirmId()')
   } // confirmId
 
   var confirmSuccess = function () {
@@ -105,6 +112,21 @@ var UI = (function () {
     })
   }
 
+  var inputDefaultValue = function () {
+    var i
+    var inputfield = document.querySelectorAll(arguments[0].selector)
+
+    for (i = 0; i < inputfield.length; i++) {
+      inputfield[i].addEventListener('focus', function () {
+        if (this.value === this.defaultValue) this.previousSibling.style.display = 'none'
+      })
+
+      inputfield[i].addEventListener('blur', function () {
+        if (this.value === '') this.previousSibling.style.display = 'block'
+      })
+    }
+  }
+
   return {
     callConfirmId: function () {
       return confirmId(arguments[0])
@@ -120,14 +142,19 @@ var UI = (function () {
     },
     callDesignSelect: function () {
       return designSelect(arguments[0])
+    },
+    callInputDefaultValue: function () {
+      return inputDefaultValue(arguments[0])
     }
   }
 }()) // UI
 
 document.addEventListener('DOMContentLoaded', function () {
-  console.log('(Event) DOMContentLoaded')
+  // console.log('(Event) DOMContentLoaded')
 
   UI.callDesignSelect({selector: '#selectCategory'})
+
+  UI.callInputDefaultValue({selector: '.inputfield_global'})
 
   document.querySelector('.confirmId') && document.querySelector('.confirmId').addEventListener('click', function () {
     var register = document.register
@@ -153,6 +180,10 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('.layer_wrapper').classList.add('open')
     document.querySelector('.layer_wrapper').querySelector('.img_preview').setAttribute('src', imgSrc)
   })
+
+  document.querySelector('.success') && document.querySelector('.success').addEventListener('click', function () {
+    UI.callConfirmSuccess('') // 회원가입: 아이디 중복확인 성공
+  }) // confirmSuccess
 
   document.querySelector('.button_comment') && document.querySelector('.button_comment').addEventListener('click', function () {
     var query = {

@@ -12,8 +12,6 @@
 </template>
 
 <script>
-// components/header/State.vue
-
 export default {
   name: 'state',
   data () {
@@ -21,17 +19,12 @@ export default {
   },
   mounted () {
     this.state = localStorage.getItem('auth_token')
-    console.log('(State.vue) this.state: ', this.state)
   },
   methods: {
     logout () {
       this.state = null
-      localStorage.clear()
 
-      console.log('*** (State.vue) this.state: ', this.state)
-      console.log('*** (State.vue) localStorage.getItem(\'auth_token\'): ', localStorage.getItem('auth_token'))
-      console.log('*** (State.vue) localStorage.getItem(\'id\'): ', localStorage.getItem('id'))
-      console.log('*** (State.vue) localStorage.getItem(\'name\'): ', localStorage.getItem('name'))
+      localStorage.clear()
     }
   }
 }

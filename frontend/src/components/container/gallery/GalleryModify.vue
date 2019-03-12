@@ -6,30 +6,30 @@
       <caption>이미지 게시판에 등록된 게시물의 카테고리, 제목, 내용을 수정할 수 있습니다.</caption>
 
       <colgroup>
-        <col style="width:10%;" />
-        <col />
+        <col style="width:10%;">
+        <col>
       </colgroup>
 
       <tbody>
         <tr>
           <th scope="row">번호</th>
-          <td><span class="inputfield_outer"><input type="text" name="number" class="inputfield_global" v-model="number" /></span></td>
+          <td><span class="inputfield_outer"><input type="text" name="number" class="inputfield_global" v-model="number"></span></td>
         </tr>
         <tr>
           <th scope="row">아이디</th>
-          <td><span class="inputfield_outer"><input type="text" name="id" class="inputfield_global" v-model="id" /></span></td>
+          <td><span class="inputfield_outer"><input type="text" name="id" class="inputfield_global" v-model="id"></span></td>
         </tr>
         <tr>
           <th scope="row">작성자</th>
-          <td><span class="inputfield_outer"><input type="text" name="name" class="inputfield_global" v-model="name" /></span></td>
+          <td><span class="inputfield_outer"><input type="text" name="name" class="inputfield_global" v-model="name"></span></td>
         </tr>
         <tr>
           <th scope="row">카테고리</th>
-          <td><span class="inputfield_outer"><input type="text" name="category" class="inputfield_global" v-model="category" /></span></td>
+          <td><span class="inputfield_outer"><input type="text" name="category" class="inputfield_global" v-model="category"></span></td>
         </tr>
         <tr>
           <th scope="row">제목</th>
-          <td><span class="inputfield_outer"><input type="text" name="subject" class="inputfield_global"  v-model="subject" /></span></td>
+          <td><span class="inputfield_outer"><input type="text" name="subject" class="inputfield_global"  v-model="subject"></span></td>
         </tr>
         <tr class="row_local">
           <th scope="row">내용</th>
@@ -48,9 +48,6 @@
 </template>
 
 <script>
-// Vue Instant Life Cycle
-// beforeCreate → created → beforeMount → mounted → beforeUpdate → updated → beforeDestroy → destroyed
-
 import Constant from '../../../Constant.js'
 import Hgr from '../member/Hgroup.vue'
 

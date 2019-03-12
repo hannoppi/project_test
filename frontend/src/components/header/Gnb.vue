@@ -18,11 +18,6 @@
 </template>
 
 <script>
-// components/header/Gnb.vue
-
-// Vue Instant Life Cycle
-// beforeCreate → created → beforeMount → mounted → beforeUpdate → updated → beforeDestroy → destroyed
-
 export default {
   name: 'gnb',
   methods: {

@@ -18,13 +18,11 @@
 
             <div class="inner_fieldset">
               <div class="inputfield_outer">
-                <label for="id">아이디</label>
-                <input type="text" name="id" id="id" class="inputfield_global" value="" /><!-- // placeholder="찾고자 하는 아이디를 입력해주세요." -->
+                <label for="id">아이디</label><input type="text" name="id" id="id" class="inputfield_global" value="">
               </div><!-- // inputfield_outer -->
 
               <div class="inputfield_outer">
-                <label for="quiz">2차 패스워드</label>
-                <input type="text" name="quiz" id="quiz" class="inputfield_global" value="" /><!-- // placeholder="직접 입력해주세요." -->
+                <label for="quiz">2차 패스워드</label><input type="text" name="quiz" id="quiz" class="inputfield_global" value="">
               </div><!-- // inputfield_outer -->
 
                 <div class="button_area">
@@ -42,9 +40,6 @@
 </template>
 
 <script>
-// Vue Instant Life Cycle
-// beforeCreate → created → beforeMount → mounted → beforeUpdate → updated → beforeDestroy → destroyed
-
 import Constant from '../../../Constant'
 
 export default {

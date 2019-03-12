@@ -5,8 +5,6 @@
 </template>
 
 <script>
-// components/footer/Footer.vue
-
 export default {
   name: 'ftr'
 }

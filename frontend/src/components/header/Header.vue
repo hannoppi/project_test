@@ -9,8 +9,6 @@
 </template>
 
 <script>
-// components/header/Header.vue
-
 import Gnb from './gnb.vue'
 import State from './state.vue'
 

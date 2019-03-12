@@ -1,5 +1,3 @@
-// Constant.js
-
 export default {
   USER: 'uesr',
   HEADER: 'header',
@@ -9,5 +7,7 @@ export default {
   WRITE: 'write',
   VIEW: 'view',
   MODIFY: 'modify',
-  DELETE: 'delete'
+  DELETE: 'delete',
+  CONFIRMID: 'confirmId',
+  REGISTER: 'register'
 }

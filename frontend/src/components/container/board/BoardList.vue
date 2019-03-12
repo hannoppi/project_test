@@ -6,12 +6,12 @@
       <caption>일반 게시판의 등록된 게시물의 번호, 카테고리, 제목, 등록일, 조회수를 확인할 수 있습니다.</caption>
 
       <colgroup>
-        <col style="width:10%;" />
-        <col style="width:10%;" />
-        <col />
-        <col style="width:10%;" />
-        <col style="width:15%;" />
-        <col style="width:10%;" />
+        <col style="width:10%;">
+        <col style="width:10%;">
+        <col>
+        <col style="width:10%;">
+        <col style="width:15%;">
+        <col style="width:10%;">
       </colgroup>
 
       <thead>
@@ -27,12 +27,12 @@
 
       <tbody v-if="boardlist.length !== 0">
         <tr v-for="(board, index) in boardlist" v-bind:key="index">
-          <td>{{board.number}}</td>
-          <td>{{board.category}}</td>
-          <td class="subject"><router-link v-bind:to="{name: 'BoardView', params: {number: board.number}}">{{board.subject}}</router-link></td>
-          <td>{{board.name}}</td>
-          <td>{{board.regdate}}</td>
-          <td>{{board.count}}</td>
+          <td>{{ board.number }}</td>
+          <td>{{ board.category }}</td>
+          <td class="subject"><router-link v-bind:to="{ name: 'BoardView', params: { number: board.number } }">{{ board.subject }}</router-link></td>
+          <td>{{ board.name }}</td>
+          <td>{{ board.regdate }}</td>
+          <td>{{ board.count }}</td>
         </tr>
       </tbody>
 
@@ -48,14 +48,7 @@
       <a href="#" class="previous" v-else v-on:click="boardList">이전</a>
 
       <div class="inner_paging">
-        <router-link
-          v-bind:to="{ name: 'BoardList', query: { number: index } }"
-          v-for="index in paging | paging.endPage"
-          v-bind:key="index"
-          v-bind:class="current (index)"
-          v-on:click.native="boardList(index)"
-        >
-          {{ index }}<span class="invisible" v-if="paging.currentPage === index">현재 페이지</span>
+        <router-link v-bind:to="{ name: 'BoardList', query: { number: index } }" v-for="index in paging | paging.endPage" v-bind:key="index" v-bind:class="current (index)" v-on:click.native="boardList(index)">{{ index }}<span class="invisible" v-if="paging.currentPage === index">현재 페이지</span>
         </router-link>
       </div><!-- // inner_paging -->
 
@@ -76,7 +69,7 @@
         </select>
       </div><!-- // design_select -->
 
-      <span class="inputfield_outer"><input type="text" name="keyword" class="inputfield_keyword" v-model="keyword" /></span>
+      <span class="inputfield_outer"><input type="text" name="keyword" class="inputfield_keyword" v-model="keyword"></span>
       <a href="#" class="button_global" v-on:click="boardList(null)">검색</a>
     </div><!-- // board_search -->
 
@@ -89,9 +82,6 @@
 </template>
 
 <script>
-// Vue Instant Life Cycle
-// beforeCreate → created → beforeMount → mounted → beforeUpdate → updated → beforeDestroy → destroyed
-
 import Constant from '../../../Constant.js'
 import Hgr from '../member/Hgroup.vue'
 

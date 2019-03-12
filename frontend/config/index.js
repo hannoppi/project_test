@@ -10,9 +10,9 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: { // Vue.js Quick Start 266
+    proxyTable: {
       '/api': {
-        target: 'http://localhost:8537',
+        target: 'http://localhost:8537', // 당신의 주소를 입력해주세요.
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''

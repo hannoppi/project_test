@@ -18,13 +18,11 @@
 
             <div class="inner_fieldset">
               <div class="inputfield_outer">
-                <label for="name">이름</label>
-                <input type="text" name="name" id="name" class="inputfield_global" value="" /><!-- // placeholder="이름을 입력해주세요." -->
+                <label for="name">이름</label><input type="text" name="name" id="name" class="inputfield_global" value="">
               </div><!-- // inputfield_outer -->
 
               <div class="inputfield_outer">
-                <label for="birthday">생년월일</label>
-                <input type="number" name="birthday" id="birthday" class="inputfield_global" value="" /><!-- // placeholder="'-' 없이 입력해주세요. 예를 들어, 19700101" -->
+                <label for="birthday">생년월일</label><input type="number" name="birthday" id="birthday" class="inputfield_global" value="">
               </div><!-- // inputfield_outer -->
 
               <div class="inputfield_outer">
@@ -41,7 +39,7 @@
                   </select>
                 </div><!-- // design_select -->
 
-                <input type="text" name="phone" id="phone" class="inputfield_global" value="" placeholder="'-' 없이 입력해주세요. 예를 들어, 01012345678" />
+                <input type="text" name="phone" id="phone" class="inputfield_global" value="" placeholder="'-' 없이 입력해주세요. 예를 들어, 01012345678">
               </div><!-- // inputfield_outer -->
 
               <div class="button_area">
@@ -59,9 +57,6 @@
 </template>
 
 <script>
-// Vue Instant Life Cycle
-// beforeCreate → created → beforeMount → mounted → beforeUpdate → updated → beforeDestroy → destroyed
-
 import Constant from '../../../Constant'
 
 export default {

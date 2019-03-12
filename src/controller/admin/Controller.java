@@ -54,10 +54,12 @@ import action.member.admin.MemberChangePasswordView;
 import action.member.admin.MemberConfirmIdAction;
 import action.member.admin.MemberFindIdAction;
 import action.member.admin.MemberLoginAction;
-import action.member.admin.MemberLoginActionVue;
 import action.member.admin.MemberLogoutAction;
 import action.member.admin.MemberModifyAction;
 import action.member.admin.MemberRegisterAction;
+import action.member.vue.admin.MemberConfirmIdActionVue;
+import action.member.vue.admin.MemberLoginActionVue;
+import action.member.vue.admin.MemberRegisterActionVue;
 import action.notice.admin.NoticeDeleteAction;
 import action.notice.admin.NoticeListView;
 import action.notice.admin.NoticeModifyAction;
@@ -663,7 +665,6 @@ public class Controller extends HttpServlet {
 			forward.setPath("/admin/vuejs/html/member/register.jsp");
 			
 		} else if (command.equals("/admin/vuejs/register.action")) {
-			/*
 			action = new MemberRegisterActionVue();
 			
 			try {
@@ -672,19 +673,16 @@ public class Controller extends HttpServlet {
 				// TODO: handle exception
 				e.printStackTrace();
 			}
-			*/
-			
+
 		} else if (command.equals("/admin/vuejs/confirmId.action")) {
-			/*
 			action = new MemberConfirmIdActionVue();
-			
+
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
 			}
-			*/
 			
 		} else if (command.equals("/admin/vuejs/find/id.do")) {
 			/*

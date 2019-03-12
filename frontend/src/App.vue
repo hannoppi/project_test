@@ -1,5 +1,5 @@
 <template>
-  <div id="app" v-bind:class="{main: this.$store.state.header}">
+  <div id="app" v-bind:class="{ main: this.$store.state.header }">
     <accessibility></accessibility>
 
     <wrapper></wrapper>
@@ -9,19 +9,12 @@
 <script>
 import Accessibility from './components/Accessibility.vue'
 import Wrapper from './components/Wrapper.vue'
-// import Paginate from 'vuejs-paginate'
 
 export default {
   name: 'App',
-  // computed: {
-  //   pageCheck () {
-  //     return this.$store.state.member
-  //   }
-  // },
   components: {
     'accessibility': Accessibility,
     'wrapper': Wrapper
-    // 'paginate': Paginate
   }
 }
 </script>

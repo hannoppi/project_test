@@ -48,16 +48,18 @@ public class NoticeListView implements Action {
 		
 		// 전체 페이지 개수합니다.
 		int maxPage = (int) ((double) listCount / limit + 0.95);
+		System.out.println("[NoticeListView.java] maxPage : " + maxPage);
 		
 		// 현재 페이지에 노출할 시작 페이지 개수입니다. (1, 11, 21)
 		int startPage = (((int) ((double) currentPage / 10 + 0.9)) - 1) * 10 + 1;
+		System.out.println("[NoticeListView.java] startPage : " + startPage);
 		
 		// 현재 페이지에 노출할 마지막 페이지 개수입니다. (10, 20, 30) 10 페이지씩
 		int endPage = startPage + 10 - 1;
-		System.out.println("[NoticeListView.java] endPage : " + endPage);
+		System.out.println("[NoticeListView.java] 1. endPage : " + endPage);
 		
 		if (endPage > maxPage) endPage = maxPage;
-		System.out.println("[NoticeListView.java] endPage : " + endPage);
+		System.out.println("[NoticeListView.java] 2. endPage : " + endPage);
 		
 		if (noticeList != null) {
 			System.out.println("[NoticeListView.java] 게시물의 목록을 추출하였습니다.");
